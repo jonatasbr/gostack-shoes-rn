@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import './config/ReactotronConfig';
+
+import Routes from './routes';
 
 export const styles = StyleSheet.create({
   container: {
@@ -19,11 +21,7 @@ export const styles = StyleSheet.create({
 
 function App() {
   console.tron.log('testadon o reactotron');
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>welcome, rocketshoes.</Text>
-    </View>
-  );
+  return <Routes />;
 }
 
 export default App;
