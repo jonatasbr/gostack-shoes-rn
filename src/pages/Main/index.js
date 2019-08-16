@@ -1,19 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
 
-// import { Container } from './styles';
-
-const styles = StyleSheet.create({
-  testText: {
-    color: '#000',
-    fontSize: 20,
-  },
-});
+import { Container } from './styles';
 
 export default function Main() {
   return (
-    <View>
-      <Text style={styles.testText}>Main</Text>
-    </View>
+    <>
+      <Container />
+    </>
   );
 }
