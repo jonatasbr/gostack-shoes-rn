@@ -5,7 +5,6 @@ import './config/ReactotronConfig';
 import Routes from './routes';
 
 function App() {
-  console.tron.log('testadon o reactotron');
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#000" />

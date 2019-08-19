@@ -1,16 +1,73 @@
-import React from 'react';
-import foto from '../../images/tenis1.jpg';
+import React, { Component } from 'react';
+import { FlatList } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, ShoesView, ShoesImage } from './styles';
+import api from '../../services/api';
+import formatPrice from '../../util/format';
 
-export default function Main() {
-  return (
-    <>
+import {
+  Container,
+  ItemView,
+  ItemImage,
+  ItemText,
+  ItemPrice,
+  ItemButton,
+  ItemButtonText,
+  ItemAmount,
+  ItemAmountText,
+} from './styles';
+
+export default class Main extends Component {
+  state = {
+    products: [],
+  };
+
+  componentDidMount() {
+    this.getProducts();
+  }
+
+  getProducts = async () => {
+    console.tron.log('teste 1');
+    const response = await api.get('/products');
+    console.tron.log('teste 2');
+    console.tron.log(response);
+
+    const data = response.data.map(product => ({
+      ...product,
+      priceFormatted: formatPrice(product.price),
+    }));
+
+    this.setState({ products: data });
+  };
+
+  renderProduct = ({ item }) => {
+    return (
+      <ItemView key={item.id}>
+        <ItemImage source={{ uri: item.image }} />
+        <ItemText>{item.title}</ItemText>
+        <ItemPrice>{item.priceFormatted}</ItemPrice>
+        <ItemButton>
+          <ItemAmount>
+            <Icon name="add-shopping-cart" color="#FFF" size={24} />
+            <ItemAmountText>3</ItemAmountText>
+          </ItemAmount>
+          <ItemButtonText>ADICIONAR</ItemButtonText>
+        </ItemButton>
+      </ItemView>
+    );
+  };
+
+  render() {
+    const { products } = this.state;
+    return (
       <Container>
-        <ShoesView>
-          <ShoesImage source={foto} />
-        </ShoesView>
+        <FlatList
+          horizontal
+          data={products}
+          keyExtractor={item => String(item.id)}
+          renderItem={this.renderProduct}
+        />
       </Container>
-    </>
-  );
+    );
+  }
 }
