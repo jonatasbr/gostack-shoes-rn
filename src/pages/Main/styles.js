@@ -10,14 +10,14 @@ export const Container = styled.View`
 export const ItemView = styled.View`
   background: #fff;
   padding: 10px;
-  margin: 50px;
+  margin: 60px;
   border-radius: 4px;
   width: 240px;
 `;
 
 export const ItemImage = styled.Image`
   width: 200px;
-  height: 200px;
+  height: 220px;
 `;
 
 export const ItemText = styled.Text`
@@ -27,7 +27,7 @@ export const ItemText = styled.Text`
 export const ItemPrice = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 `;
 
 export const ItemButton = styled.TouchableOpacity`
@@ -58,5 +58,6 @@ export const ItemAmount = styled.View`
 
 export const ItemAmountText = styled.Text`
   color: #fff;
-  margin: 0px 4px 0px 10px;
+  margin: 0px 4px 0px 5px;
+  font-weight: bold;
 `;

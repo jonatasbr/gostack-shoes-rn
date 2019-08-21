@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
-import formatPrice from '../../util/format';
+import { formatPrice } from '../../util/format';
 
 import {
   Container,
@@ -23,14 +23,11 @@ export default class Main extends Component {
   };
 
   componentDidMount() {
-    this.getProducts();
+    this.loadProducts();
   }
 
-  getProducts = async () => {
-    console.tron.log('teste 1');
-    const response = await api.get('/products');
-    console.tron.log('teste 2');
-    console.tron.log(response);
+  loadProducts = async () => {
+    const response = await api.get('products');
 
     const data = response.data.map(product => ({
       ...product,
@@ -48,7 +45,7 @@ export default class Main extends Component {
         <ItemPrice>{item.priceFormatted}</ItemPrice>
         <ItemButton>
           <ItemAmount>
-            <Icon name="add-shopping-cart" color="#FFF" size={24} />
+            <Icon name="add-shopping-cart" color="#FFF" size={18} />
             <ItemAmountText>3</ItemAmountText>
           </ItemAmount>
           <ItemButtonText>ADICIONAR</ItemButtonText>
