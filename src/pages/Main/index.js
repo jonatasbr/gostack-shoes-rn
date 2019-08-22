@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FlatList } from 'react-native';
+import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
@@ -17,7 +18,7 @@ import {
   ItemAmountText,
 } from './styles';
 
-export default class Main extends Component {
+class Main extends Component {
   state = {
     products: [],
   };
@@ -25,6 +26,15 @@ export default class Main extends Component {
   componentDidMount() {
     this.loadProducts();
   }
+
+  handleAddProduct = product => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: '@cart/ADD',
+      product,
+    });
+  };
 
   loadProducts = async () => {
     const response = await api.get('products');
@@ -43,7 +53,7 @@ export default class Main extends Component {
         <ItemImage source={{ uri: item.image }} />
         <ItemText>{item.title}</ItemText>
         <ItemPrice>{item.priceFormatted}</ItemPrice>
-        <ItemButton>
+        <ItemButton onPress={() => this.handleAddProduct(item)}>
           <ItemAmount>
             <Icon name="add-shopping-cart" color="#FFF" size={18} />
             <ItemAmountText>3</ItemAmountText>
@@ -68,3 +78,5 @@ export default class Main extends Component {
     );
   }
 }
+
+export default connect()(Main);
