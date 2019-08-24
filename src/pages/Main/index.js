@@ -48,6 +48,8 @@ class Main extends Component {
   };
 
   renderProduct = ({ item }) => {
+    const { amount } = this.props;
+
     return (
       <ItemView key={item.id}>
         <ItemImage source={{ uri: item.image }} />
@@ -56,7 +58,7 @@ class Main extends Component {
         <ItemButton onPress={() => this.handleAddProduct(item)}>
           <ItemAmount>
             <Icon name="add-shopping-cart" color="#FFF" size={18} />
-            <ItemAmountText>3</ItemAmountText>
+            <ItemAmountText>{amount[item.id] || 0}</ItemAmountText>
           </ItemAmount>
           <ItemButtonText>ADICIONAR</ItemButtonText>
         </ItemButton>
@@ -79,4 +81,11 @@ class Main extends Component {
   }
 }
 
-export default connect()(Main);
+const mapStateToProps = state => ({
+  amount: state.cart.reduce((amount, product) => {
+    amount[product.id] = product.amount;
+    return amount;
+  }, {}),
+});
+
+export default connect(mapStateToProps)(Main);

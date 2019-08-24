@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { formatPrice } from '../../util/format';
 import {
   Container,
   Products,
@@ -81,7 +82,15 @@ function Cart({ products }) {
 const mapStateToProps = state => ({
   products: state.cart.map(product => ({
     ...product,
+    subtotal: formatPrice(product.price * product.amount),
+    priceFormatted: formatPrice(product.price),
   })),
+  total: formatPrice(
+    state.cart.reduce(
+      (total, product) => total + product.price * product.amount,
+      0
+    )
+  ),
 });
 
 export default connect(mapStateToProps)(Cart);
