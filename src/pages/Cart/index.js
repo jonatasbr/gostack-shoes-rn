@@ -29,7 +29,15 @@ import {
 
 import * as CartActions from '../../store/modules/cart/actions';
 
-function Cart({ products, removeFromCart }) {
+function Cart({ products, removeFromCart, updateAmount }) {
+  function increment(product) {
+    updateAmount(product.id, product.amount + 1);
+  }
+
+  function decrement(product) {
+    updateAmount(product.id, product.amount - 1);
+  }
+
   return (
     <Container>
       {products.length ? (
@@ -48,7 +56,7 @@ function Cart({ products, removeFromCart }) {
                   </ProductDelete>
                 </ProductInfo>
                 <ProductControls>
-                  <ProductControlButton>
+                  <ProductControlButton onPress={() => decrement(product)}>
                     <Icon
                       name="remove-circle-outline"
                       size={20}
@@ -56,7 +64,8 @@ function Cart({ products, removeFromCart }) {
                     />
                   </ProductControlButton>
                   <ProductAmount value={String(product.amount)} />
-                  <ProductControlButton>
+
+                  <ProductControlButton onPress={() => increment(product)}>
                     <Icon name="add-circle-outline" size={20} color="#7459c1" />
                   </ProductControlButton>
                   <ProductSubtotal>{product.subtotal}</ProductSubtotal>
