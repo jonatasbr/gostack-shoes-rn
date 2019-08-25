@@ -29,7 +29,7 @@ import {
 
 import * as CartActions from '../../store/modules/cart/actions';
 
-function Cart({ products, removeFromCart, updateAmount }) {
+function Cart({ products, total, removeFromCart, updateAmount }) {
   function increment(product) {
     updateAmount(product.id, product.amount + 1);
   }
@@ -75,7 +75,7 @@ function Cart({ products, removeFromCart, updateAmount }) {
           </Products>
           <TotalContainer>
             <TotalText>TOTAL</TotalText>
-            <TotalAmount>R$ reais</TotalAmount>
+            <TotalAmount>{total}</TotalAmount>
             <Order>
               <OrderText>FINALIZAR PEDIDO</OrderText>
             </Order>
