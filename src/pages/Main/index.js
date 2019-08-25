@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -30,9 +31,9 @@ class Main extends Component {
   }
 
   handleAddProduct = product => {
-    const { dispatch } = this.props;
+    const { addToCart } = this.props;
 
-    dispatch(CartActions.addToCart(product));
+    addToCart(product);
   };
 
   loadProducts = async () => {
@@ -47,7 +48,7 @@ class Main extends Component {
   };
 
   renderProduct = ({ item }) => {
-    const { amount } = this.props;
+    //    const { amount } = this.props;
 
     return (
       <ItemView key={item.id}>
@@ -57,7 +58,7 @@ class Main extends Component {
         <ItemButton onPress={() => this.handleAddProduct(item)}>
           <ItemAmount>
             <Icon name="add-shopping-cart" color="#FFF" size={18} />
-            <ItemAmountText>{amount[item.id] || 0}</ItemAmountText>
+            <ItemAmountText>0</ItemAmountText>
           </ItemAmount>
           <ItemButtonText>ADICIONAR</ItemButtonText>
         </ItemButton>
@@ -80,11 +81,18 @@ class Main extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  amount: state.cart.reduce((amount, product) => {
-    amount[product.id] = product.amount;
-    return amount;
-  }, {}),
-});
+// const mapStateToProps = state => ({
+//   amount: state.cart.reduce((amount, product) => {
+//     amount[product.id] = product.amount;
+//     return amount;
+//   }, {}),
+// });
 
-export default connect(mapStateToProps)(Main);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(
+  null,
+  // mapStateToProps,
+  mapDispatchToProps
+)(Main);
