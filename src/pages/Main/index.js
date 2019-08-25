@@ -18,6 +18,8 @@ import {
   ItemAmountText,
 } from './styles';
 
+import * as CartActions from '../../store/modules/cart/actions';
+
 class Main extends Component {
   state = {
     products: [],
@@ -30,10 +32,7 @@ class Main extends Component {
   handleAddProduct = product => {
     const { dispatch } = this.props;
 
-    dispatch({
-      type: '@cart/ADD',
-      product,
-    });
+    dispatch(CartActions.addToCart(product));
   };
 
   loadProducts = async () => {

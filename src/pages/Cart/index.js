@@ -26,6 +26,8 @@ import {
   EmptyText,
 } from './styles';
 
+import * as CartActions from '../../store/modules/cart/actions';
+
 function Cart({ products, dispatch }) {
   return (
     <Container>
@@ -42,7 +44,7 @@ function Cart({ products, dispatch }) {
                   </ProductDetails>
                   <ProductDelete
                     onPress={() =>
-                      dispatch({ type: '@cart/REMOVE', id: product.id })
+                      dispatch(CartActions.removeFromCart(product.id))
                     }
                   >
                     <Icon name="delete-forever" size={24} color="#7459c1" />
