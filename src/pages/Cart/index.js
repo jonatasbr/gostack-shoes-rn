@@ -29,7 +29,7 @@ import {
 
 import * as CartActions from '../../store/modules/cart/actions';
 
-function Cart({ products, total, removeFromCart, updateAmountRequest }) {
+function Cart({ navigation, products, total, removeFromCart, updateAmountRequest }) {
   function increment(product) {
     updateAmountRequest(product.id, product.amount + 1);
   }

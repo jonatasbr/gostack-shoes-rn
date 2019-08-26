@@ -6,13 +6,15 @@ import { StatusBar } from 'react-native';
 import store from './store/index';
 
 import Routes from './routes';
+import NavigationService from './services/navigation';
 
 function App() {
   return (
     <>
       <Provider store={store}>
         <StatusBar barStyle="light-content" backgroundColor="#000" />
-        <Routes />
+        <Routes
+          ref={navigatorRef => NavigationService.setNavigator(navigatorRef)} />
       </Provider>
     </>
   );
