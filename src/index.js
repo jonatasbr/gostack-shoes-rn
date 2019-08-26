@@ -1,9 +1,9 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
-
 import { Provider } from 'react-redux';
-import store from './store/index';
 import './config/ReactotronConfig';
+
+import { StatusBar } from 'react-native';
+import store from './store/index';
 
 import Routes from './routes';
 

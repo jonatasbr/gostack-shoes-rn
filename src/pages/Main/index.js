@@ -30,10 +30,10 @@ class Main extends Component {
     this.loadProducts();
   }
 
-  handleAddProduct = product => {
-    const { addToCart } = this.props;
+  handleAddProduct = id => {
+    const { addToCartRequest } = this.props;
 
-    addToCart(product);
+    addToCartRequest(id);
   };
 
   loadProducts = async () => {
@@ -55,7 +55,7 @@ class Main extends Component {
         <ItemImage source={{ uri: item.image }} />
         <ItemText>{item.title}</ItemText>
         <ItemPrice>{item.priceFormatted}</ItemPrice>
-        <ItemButton onPress={() => this.handleAddProduct(item)}>
+        <ItemButton onPress={() => this.handleAddProduct(item.id)}>
           <ItemAmount>
             <Icon name="add-shopping-cart" color="#FFF" size={18} />
             <ItemAmountText>{amount[item.id] || 0}</ItemAmountText>
@@ -68,10 +68,6 @@ class Main extends Component {
 
   render() {
     const { products } = this.state;
-    console.tron.log('testando');
-    const { amount } = this.props;
-    console.tron.log({ amount });
-    console.tron.log(this.props);
 
     return (
       <Container>
