@@ -1,7 +1,7 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState, useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { FlatList } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '../../services/api';
